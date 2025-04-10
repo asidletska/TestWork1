@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3142572392820671158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1718135773600006207, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585553951847, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d369ae2f14ad31240811200bdce1860b, type: 2}
+    - target: {fileID: 7954160585561230913, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_Name
+      value: TT_demo_zombie Variant Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 265.23953
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 56.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -122.35719
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000016292068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7954160585561461281, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 153384055820912426, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+    - {fileID: 2755799992985578942, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7954160585561230913, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7346049353338383342}
+  m_SourcePrefab: {fileID: 100100000, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+--- !u!1 &5043594080908266743 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7954160585561230913, guid: 27fdd97660805e54aa0d582cfd30ac37, type: 3}
+  m_PrefabInstance: {fileID: 3142572392820671158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7346049353338383342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5043594080908266743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93384acfac87692438dc02cda859d0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  detectionRange: 15
+  throwInterval: 3
+  throwPoint: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  throwForce: 18
