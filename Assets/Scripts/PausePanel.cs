@@ -18,7 +18,7 @@ public class PausePanel : MonoBehaviour
     public void RestartHandler()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
     public void BackToMenu()
     {

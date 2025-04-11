@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     public Transform player;
-    public float detectionRange = 15f;
+    public int spawnIndex;
+    public EnemySpawner spawner;
+    public float detectionRange = 30f;
+    public float throwRange = 10f;
     public float throwInterval = 3f;
-    private int health = 100;
+    private int health = 50;
 
     [Header("Throwing")]
     public Transform throwPoint;
@@ -13,36 +17,49 @@ public class Enemy : MonoBehaviour
     public float throwForce = 18f;
 
     private Animator animator;
-    private float throwCooldown;
+    private float throwCooldown = 2;
+
+    private NavMeshAgent agent;
+    private bool isDead = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
         throwCooldown = throwInterval;
     }
 
     void Update()
     {
-        if (player == null) return;
+        if (player == null || isDead) return;
 
-        float distance = Vector3.Distance(transform.position, player.position);
+        float distance = Vector3.Distance(transform.position, player.transform.position);
 
         if (distance <= detectionRange)
         {
-            LookAtPlayer();
-
-            throwCooldown -= Time.deltaTime;
-            if (throwCooldown <= 0f)
+            if (distance > throwRange)
             {
-                ThrowWeapon();
-                throwCooldown = throwInterval;
+                agent.SetDestination(player.position);
+                animator.SetFloat("isRunning", 1);
+            }
+            else
+            {
+                agent.SetDestination(transform.position);
+                animator.SetFloat("isRunning", 0);
+                LookAtPlayer();
+
+                throwCooldown -= Time.deltaTime;
+                if (throwCooldown <= 0f)
+                {
+                    ThrowWeapon();
+                    throwCooldown = throwInterval;
+                }
             }
         }
     }
-
     void LookAtPlayer()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = (player.transform.position - transform.position).normalized;
         direction.y = 0;
         if (direction != Vector3.zero)
         {
@@ -51,31 +68,40 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void ThrowWeapon()
+    public void ThrowWeapon()
     {
         animator.SetTrigger("Throw");
-
+        Invoke(nameof(SpawnWeapon), 0.5f);
+    }
+    void SpawnWeapon()
+    {
         GameObject weapon = Instantiate(weaponPrefab, throwPoint.position, throwPoint.rotation);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
-
-        Vector3 direction = (player.position + Vector3.up * 1.5f - throwPoint.position).normalized;
+        Vector3 direction = (player.transform.position + Vector3.up * 1.5f - throwPoint.position).normalized;
         rb.AddForce(direction * throwForce, ForceMode.Impulse);
     }
     public void TakeDamage(int damage)
     {
-
+        if (isDead) return;
         health -= damage;
 
         if (health <= 0)
         {
+            animator.SetTrigger("Die");
             Die();
-            GameManager.instance.AddKill();
         }
     }
 
-    void Die()
+    public void Die()
     {
         animator.SetTrigger("Die");
-        enabled = false;
+        isDead = true;
+        agent.enabled = false;
+        Destroy(gameObject, 3);
+        GameManager.instance.AddKill();
+        spawner.FreeSpawnPoint(spawnIndex);
     }
+
+
 }
+

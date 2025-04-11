@@ -1,7 +1,9 @@
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class PlayerThrow : MonoBehaviour
 {
+
     public Transform throwPoint;
     public GameObject weaponPrefab;
     public float throwForce = 20f;
@@ -24,31 +26,34 @@ public class PlayerThrow : MonoBehaviour
 
     void Update()
     {
-        // Вхід у режим прицілювання
-        if (Input.GetMouseButtonDown(1)) // ПКМ або будь-яка інша кнопка
+        if (Input.touchCount > 0)
         {
-            isAiming = true;
-        }
+            Touch touch = Input.GetTouch(0);
 
-        // Розрахунок траєкторії під час прицілювання
-        if (isAiming)
-        {
-            CalculateDirection();
-            ShowTrajectory();
-
-            if (Input.GetMouseButtonDown(0)) // ЛКМ — запустити кидок
+            if (touch.phase == TouchPhase.Began && !isAiming)
             {
-                animator.SetTrigger("Throw");
-                isAiming = false;
-                lineRenderer.positionCount = 0; // сховати лінію
+                isAiming = true;
+            }
+
+            if (isAiming)
+            {
+                CalculateDirection(touch.position);
+                ShowTrajectory();
+
+                if (Input.touchCount > 1 || touch.phase == TouchPhase.Ended)
+                {
+                    animator.SetTrigger("Throw");
+                    isAiming = false;
+                    lineRenderer.positionCount = 0;
+                }
             }
         }
     }
 
-    void CalculateDirection()
+    void CalculateDirection(Vector2 screenPosition)
     {
-        Vector3 mouseWorld = GetMouseWorldPosition();
-        throwDirection = (mouseWorld - throwPoint.position).normalized;
+        Vector3 touchWorld = GetTouchWorldPosition(screenPosition);
+        throwDirection = (touchWorld - throwPoint.position).normalized;
     }
 
     void ShowTrajectory()
@@ -76,9 +81,9 @@ public class PlayerThrow : MonoBehaviour
         lineRenderer.SetPositions(points);
     }
 
-    Vector3 GetMouseWorldPosition()
+    Vector3 GetTouchWorldPosition(Vector2 screenPos)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, groundMask))
         {
             return hit.point;
@@ -86,7 +91,6 @@ public class PlayerThrow : MonoBehaviour
         return throwPoint.position + throwPoint.forward * 5f;
     }
 
-    // Цей метод викликається на першому кадрі анімації кидка через Animation Event
     public void ThrowWeapon()
     {
         GameObject weapon = Instantiate(weaponPrefab, throwPoint.position, throwPoint.rotation);

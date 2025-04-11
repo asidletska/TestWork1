@@ -2,36 +2,39 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
-    public Transform[] spawnPoints;
-    public float spawnInterval = 3f;
-    public float startDelay = 2f;
 
-    private float timer;
+    public Transform[] spawnPoints;
+    public GameObject enemyPrefab;
+
+    private bool[] isOccupied;
 
     private void Start()
     {
-        timer = startDelay;
+        isOccupied = new bool[spawnPoints.Length];
     }
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        SpawnEnemy();
+    }
+
+    private void SpawnEnemy()
+    {
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            SpawnEnemy();
-            timer = spawnInterval;
+            if (!isOccupied[i])
+            {
+                GameObject enemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity);
+                enemy.GetComponent<Enemy>().spawnIndex = i;
+                enemy.GetComponent<Enemy>().spawner = this;
+                isOccupied[i] = true;
+                break;
+            }
         }
     }
 
-    public void SpawnEnemy()
+    public void FreeSpawnPoint(int index)
     {
-        if (spawnPoints.Length == 0 || enemyPrefabs.Length == 0) return;
-
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
-        int enemyIndex = Random.Range(0, enemyPrefabs.Length);
-
-        Instantiate(enemyPrefabs[enemyIndex], spawnPoints[spawnIndex].position, Quaternion.identity);
+        isOccupied[index] = false;
     }
-
 }

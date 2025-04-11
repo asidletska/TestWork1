@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1402010859404899931}
   - component: {fileID: 8965574408618260870}
   - component: {fileID: 5655395259239494224}
-  - component: {fileID: -4817970576179503461}
+  - component: {fileID: 7811440416777375974}
+  - component: {fileID: 6791681659840688380}
   m_Layer: 0
   m_Name: Knife1
   m_TagString: weapon
@@ -108,7 +109,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.065213874, y: 0.029722512, z: 0.5253372}
   m_Center: {x: -0.00022775307, y: -9.322993e-10, z: 0}
---- !u!114 &-4817970576179503461
+--- !u!54 &7811440416777375974
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751256862344767319}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &6791681659840688380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7751256862344767319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6ee1e5b3e178d74889293266514d33f, type: 3}
+  m_Script: {fileID: 11500000, guid: 53f78a50bcabd9343a470b837ac1596a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20

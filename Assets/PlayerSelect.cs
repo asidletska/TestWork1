@@ -52,7 +52,6 @@ public class PlayerSelect : MonoBehaviour
     public void StartScene()
     {
         PlayerPrefs.SetInt("SelectPlayer", index);
-       // DontDestroyOnLoad(characters[index]);
         SceneManager.LoadScene(1);
     }
 }

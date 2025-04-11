@@ -7,7 +7,6 @@ public class Weapon : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Player targetPlayer = collision.collider.GetComponent<Player>();
         Enemy targetEnemy = collision.collider.GetComponent<Enemy>();
 
         if (targetEnemy != null)
@@ -20,19 +19,7 @@ public class Weapon : MonoBehaviour
                 ps.Play();
             }
 
-            //Destroy(gameObject);
         }
-        if (targetPlayer != null)
-        {
-            targetPlayer.TakeDamage(damage);
-
-            if (blood != null)
-            {
-                ParticleSystem ps = Instantiate(blood, collision.contacts[0].point, Quaternion.identity);
-                //ps.Play();
-            }
-
-            //Destroy(gameObject);
-        }
+        Destroy(gameObject, 5);
     }
 }

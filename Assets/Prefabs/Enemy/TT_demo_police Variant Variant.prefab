@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -530313815057001017, guid: 581c1f5ad6d8b4644b2891fe43d3e61f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4215021116552880794, guid: 581c1f5ad6d8b4644b2891fe43d3e61f, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -70,6 +74,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1871887480981571832}
   m_SourcePrefab: {fileID: 100100000, guid: 581c1f5ad6d8b4644b2891fe43d3e61f, type: 3}
+--- !u!4 &5268370017314937124 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6159738322290543612, guid: 581c1f5ad6d8b4644b2891fe43d3e61f, type: 3}
+  m_PrefabInstance: {fileID: 2046547108095136472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5268370017315423562 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6159738322290382738, guid: 581c1f5ad6d8b4644b2891fe43d3e61f, type: 3}
@@ -87,9 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93384acfac87692438dc02cda859d0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  spawnIndex: 0
+  spawner: {fileID: 0}
   detectionRange: 15
   throwInterval: 3
-  throwPoint: {fileID: 0}
-  weaponPrefab: {fileID: 0}
+  throwPoint: {fileID: 5268370017314937124}
+  weaponPrefab: {fileID: 6218997016673230122, guid: 4ecc028395c30fc4d885a27087b34d48, type: 3}
   throwForce: 18

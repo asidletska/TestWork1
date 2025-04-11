@@ -1,19 +1,21 @@
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
-{
-    public Transform cameraTarget;
-    public float sSpeed = 10.0f;
-    public Vector3 dist;
-    public Transform lookTarget;
+{  
+    public Transform player;
+    public Vector3 offset = new Vector3(0f, 5f, -7f); 
+    public float smoothSpeed = 5f;
 
-    void FixedUpdate()
+    void LateUpdate()
     {
-        Vector3 dPos = cameraTarget.position + dist;
-        Vector3 sPos = Vector3.Lerp(transform.position, dPos, sSpeed * Time.deltaTime);
-        transform.position = sPos;
-        transform.LookAt(lookTarget.position);
+        Vector3 desiredPosition = player.transform.position + player.transform.rotation * offset;
+
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+
+        Quaternion desiredRotation = Quaternion.LookRotation(player.transform.position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, smoothSpeed * Time.deltaTime);
     }
 }
+
 
 

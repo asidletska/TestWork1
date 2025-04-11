@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameObject player;
     public GameObject loseUI;
     public Text killCounterText;
 
@@ -23,11 +22,6 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         UpdateKillUI();
         loseUI.SetActive(false);
-    }
-
-    void Update()
-    {
-
     }
 
     public void AddKill()
